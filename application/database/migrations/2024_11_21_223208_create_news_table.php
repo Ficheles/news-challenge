@@ -13,6 +13,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('slug')->unique();
+            $table->string('url_img');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

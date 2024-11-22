@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             News::create([
                 'title' => 'Notícia exemplo de ' . $category->name,
                 'content' => 'Conteúdo de exemplo para a categoria ' . $category->name,
+                'url_img' => 'https://placehold.co/890x400?text=' . $category->name,
                 'slug' => \Str::slug('Notícia exemplo de ' . $category->name),
                 'category_id' => $category->id
             ]);

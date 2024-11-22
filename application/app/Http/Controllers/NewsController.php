@@ -35,6 +35,7 @@ class NewsController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'url_img' => 'required|max:255',
             'category_id' => 'required|exists:categories,id'
         ]);
 
@@ -43,5 +44,12 @@ class NewsController extends Controller
         News::create($validated);
 
         return redirect()->route('news.index')->with('success', 'Notícia criada com sucesso!');
+    }
+
+    public function show($slug)
+    {
+        $news = News::with('category')->where('slug', $slug)->firstOrFail();
+
+        return view('news.show', compact('news'));
     }
 }

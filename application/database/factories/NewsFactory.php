@@ -17,6 +17,7 @@ class NewsFactory extends Factory
             'title' => $this->faker->sentence,
             'slug' => Str::slug($this->faker->sentence),
             'content' => $this->faker->paragraph,
+            'url_img' => $this->faker->paragraph,
             'category_id' => Category::factory(),
         ];
     }
