@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      args:
+        user: rafael
+        uid: 1000
+      context: .
+      image: noticias_app
+      dockerfile: Dockerfile
+    container_name: news_app
+    depends_on:
+      - mysql
+    volumes:
+      - ./application:/var/www
+    networks:
+      - news_network
+    working_dir: /var/www/
+
+  mysql:
+    image: mysql:5.7
+    container_name: news_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - news_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: news_nginx
+    volumes:
+      - ./application:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d
+
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
+    networks:
+      - news_network
+
+volumes:
+  dbdata:
+
+networks:
+  news_network:
+    driver: bridge
