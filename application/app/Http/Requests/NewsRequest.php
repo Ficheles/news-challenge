@@ -16,6 +16,7 @@ class NewsRequest extends FormRequest
         $rules = [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'url_img' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
         ];
 

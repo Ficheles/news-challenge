@@ -17,7 +17,7 @@ class NewsFactory extends Factory
             'title' => $this->faker->sentence,
             'slug' => Str::slug($this->faker->sentence),
             'content' => $this->faker->paragraph,
-            'url_img' => $this->faker->paragraph,
+            'url_img' => 'https://placehold.co/890x400?text=' . $this->faker->word,
             'category_id' => Category::factory(),
         ];
     }

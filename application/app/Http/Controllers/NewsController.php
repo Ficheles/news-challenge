@@ -27,6 +27,7 @@ class NewsController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view('news.create', compact('categories'));
     }
 

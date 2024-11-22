@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use Tests\TestCase;
 use App\Models\News;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ApiNewsControllerTest extends TestCase
@@ -21,7 +22,7 @@ class ApiNewsControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'title', 'slug', 'category' => ['id', 'name']],
+                    '*' => ['id', 'title', 'slug', 'url_img', 'category' => ['id', 'name']],
                 ],
                 'links',
                 'meta',
@@ -54,7 +55,9 @@ class ApiNewsControllerTest extends TestCase
         $category = Category::factory()->create();
         $payload = [
             'title' => 'New Feature in Laravel',
+            'slug' =>  Str::slug('New Feature in Laravel'),
             'content' => 'Details about the new feature.',
+            'url_img' => 'https://placehold.co/890x400?text=' . $category->name,
             'category_id' => $category->id,
         ];
 
@@ -97,6 +100,7 @@ class ApiNewsControllerTest extends TestCase
 
         $payload = [
             'title' => 'Updated Title',
+            'url_img' => 'https://placehold.co/890x400?text=' . $category->name,
             'content' => 'Updated content.',
             'category_id' => $category->id,
         ];

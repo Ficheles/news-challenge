@@ -45,6 +45,7 @@ class NewsControllerTest extends TestCase
         $response = $this->post(route('news.store'), [
             'title' => 'Sample News Title',
             'content' => 'This is the content of the news.',
+            'url_img' => 'https://placehold.co/890x400?text=' . $category->name,
             'category_id' => $category->id,
         ]);
 
@@ -53,6 +54,8 @@ class NewsControllerTest extends TestCase
         $this->assertDatabaseHas('news', [
             'title' => 'Sample News Title',
             'slug' => 'sample-news-title',
+            'content' => 'This is the content of the news.',
+            'url_img' => 'https://placehold.co/890x400?text=' . $category->name,
             'category_id' => $category->id,
         ]);
     }

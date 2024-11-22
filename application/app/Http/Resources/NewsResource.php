@@ -11,8 +11,9 @@ class NewsResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content' => $this->content,
             'slug' => $this->slug,
+            'url_img' => $this->url_img,
+            'content' => $this->content,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
