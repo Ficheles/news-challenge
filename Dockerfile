@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
- RUN apt-get update && apt-get install -y default-mysql-client && apt-get clean
+RUN apt-get update && apt-get install -y default-mysql-client && apt-get clean
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 

@@ -7,7 +7,6 @@ services:
         user: rafael
         uid: 1000
       context: .
-      image: noticias_app
       dockerfile: Dockerfile
     container_name: news_app
     depends_on:
